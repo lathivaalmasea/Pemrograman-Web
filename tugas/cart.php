@@ -8,12 +8,12 @@ if(!isset($_SESSION["cart"])){
 
 if(isset($_POST["action"]) && $_POST["action"] == "add"){
     $ProductID = $_POST["ProductID"];
-    $qyt = $_POST["qyt"];
+    $qyt = $_POST["qty"];
 
     if(isset($_SESSION["cart"]["ProductID"])){
-        $_SESSION["cart"]["$ProductID"] += $qyt;
+        $_SESSION["cart"]["$ProductID"] += $qty;
     } else {
-        $_SESSION["cart"]["$ProductID"] = $qyt;
+        $_SESSION["cart"]["$ProductID"] = $qty;
     }
     header("location:cart.php");
 }
@@ -56,19 +56,19 @@ if (isset($_GET["action"]) && $_GET["action"] == "clear") {
             </tr>
             <?php
             $total = 0;
-            foreach($_SESSION["cart"] as $ProductID => $qyt){
+            foreach($_SESSION["cart"] as $ProductID => $qty){
                 $query = "SELECT ProductName, UnitPrice from products where ProductID = $ProductID";
             $result = mysqli_query($koneksi, $query);
             $data = mysqli_fetch_assoc($result);
 
-            $subtotal = $data["UnitPrice"] * $qyt;
+            $subtotal = $data["UnitPrice"] * $qty;
             $total += $subtotal;
             ?>
             <tr>
                 <td><?= $ProductID ?></td>
                 <td><?= $data["ProductName"] ?></td>
                 <td><?= $data["UnitPrice"] ?></td>
-                <td><?= $qyt ?></td>
+                <td><?= $qty ?></td>
                 <td><?= $subtotal ?></td>
             </tr>
             <?php } ?>
@@ -82,4 +82,5 @@ if (isset($_GET["action"]) && $_GET["action"] == "clear") {
         </p>
     <?php } ?>
 </body>
+
 </html>
