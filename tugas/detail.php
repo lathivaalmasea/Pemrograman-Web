@@ -65,8 +65,9 @@ $categoryData = mysqli_fetch_assoc($resultCategory);
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="ProductID" value="<?= $data["ProductID"] ?>">
         <label><b>Many Unit Add to Cart</b></label>
-        <input type="number" name="qyt" min="1" value="1">
+        <input type="number" name="qty" min="1" value="1">
         <button type="submit">Add</button>
     </form>
 </body>
+
 </html>
