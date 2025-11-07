@@ -8,7 +8,7 @@ if(!isset($_SESSION["cart"])){
 
 if(isset($_POST["action"]) && $_POST["action"] == "add"){
     $ProductID = $_POST["ProductID"];
-    $qyt = $_POST["qty"];
+    $qty = $_POST["qty"];
 
     if(isset($_SESSION["cart"]["ProductID"])){
         $_SESSION["cart"]["$ProductID"] += $qty;
@@ -65,16 +65,16 @@ if (isset($_GET["action"]) && $_GET["action"] == "clear") {
             $total += $subtotal;
             ?>
             <tr>
-                <td><?= $ProductID ?></td>
+                <td style="text-align:center;"><?= $ProductID ?></td>
                 <td><?= $data["ProductName"] ?></td>
-                <td><?= $data["UnitPrice"] ?></td>
-                <td><?= $qty ?></td>
-                <td><?= $subtotal ?></td>
+                <td style="text-align:center;">$<?= $data["UnitPrice"] ?></td>
+                <td style="text-align:center;"><?= $qty ?></td>
+                <td style="text-align:center;">$<?= $subtotal ?></td>
             </tr>
             <?php } ?>
             <tr>
                 <td colspan="4" style="text-align:center"><b>TOTAL</b></td>
-                <td><b><?= $total ?></b></td>
+                <td><b>$<?= $total ?></b></td>
             </tr>
         </table>
         <p style="text-align:center;"> 
@@ -82,5 +82,4 @@ if (isset($_GET["action"]) && $_GET["action"] == "clear") {
         </p>
     <?php } ?>
 </body>
-
 </html>
