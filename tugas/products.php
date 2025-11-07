@@ -31,9 +31,9 @@ $data = mysqli_fetch_assoc($result);
         while($data = mysqli_fetch_assoc($result)){;
         ?>
         <tr>
-            <td><?= $data["ProductID"] ?></td>
+            <td style="text-align:center;"><?= $data["ProductID"] ?></td>
             <td><a href="detail.php?id=<?= $data["ProductID"] ?>"><?= $data["ProductName"] ?></a></td>
-            <td><?= $data["UnitPrice"] ?></td>
+            <td style="text-align:center;"><?= $data["UnitPrice"] ?></td>
         </tr>
         <?php } ?>
     </table>
