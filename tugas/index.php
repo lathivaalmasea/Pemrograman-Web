@@ -32,7 +32,7 @@ require "koneksi.php";
             $jumlah = mysqli_fetch_assoc($resultCount);
         ?>
         <tr>
-            <td><?= $no++ ?></td>
+            <td style="text-align: center;"><?= $no++ ?></td>
             <td><?= $data["CategoryName"] ?></td>
             <td><?= $data["Description"] ?></td>
             <td>
