@@ -4,7 +4,11 @@ session_start();
 
 $id = isset($_GET["id"]) ? $_GET["id"] : 0;
 
-$query = "SELECT*from products where ProductID = $id";
+$query = "SELECT p.*, s.CompanyName, c.CategoryName
+          from products p
+          join suppliers s on p.SupplierID = s.SupplierID 
+          join categories c on p.CategoryID = c.CategoryID
+          where p.ProductID = $id";
 $result = mysqli_query($koneksi, $query);
 $data = mysqli_fetch_assoc($result);
 
@@ -29,36 +33,44 @@ $categoryData = mysqli_fetch_assoc($resultCategory);
     </center>
     <table>
         <tr>
-            <td><b>ID Produk</b></td>
+            <td><b>ID</b></td>
             <td>: <?= $data["ProductID"] ?></td>
         </tr>
         <tr>
-            <td><b>Supplier ID</b></td>
-            <td>: <?= $data["SupplierID"] ?></td>
+            <td><b>Name</b></td>
+            <td>: <?= $data["ProductName"] ?></td>
+        </tr>
+        <tr>
+            <td><b>Supplier</b></td>
+            <td>: <?= $data["CompanyName"] ?></td>
         </tr>
         <tr>
             <td><b>Category ID</b></td>
-            <td>: <?= $data["CategoryID"] ?></td>
+            <td>: <?= $data["CategoryName"] ?></td>
         </tr>
         <tr>
             <td><b>Quantity Per Unit</b></td>
             <td>: <?= $data["QuantityPerUnit"] ?></td>
         </tr>
         <tr>
-            <td><b>Harga Per Unit</b></td>
-            <td>: <?= $data["UnitPrice"] ?></td>
+            <td><b>Price Per Unit</b></td>
+            <td>: $<?= $data["UnitPrice"] ?></td>
         </tr>
         <tr>
-            <td><b>Units In Stock</b></td>
+            <td><b>Unit In Stock</b></td>
             <td>: <?= $data["UnitsInStock"] ?></td>
         </tr>
         <tr>
-            <td><b>Units On Order</b></td>
+            <td><b>Unit On Order</b></td>
             <td>: <?= $data["UnitsOnOrder"] ?></td>
         </tr>
         <tr>
             <td><b>Reorder Level</b></td>
             <td>: <?= $data["ReorderLevel"] ?></td>
+        </tr>
+        <tr>
+            <td><b>Status</b></td>
+            <td>: <?= $data["Discontinued"] == 0 ? "Continue" : "Discontinued" ?></td>
         </tr>
     </table>
     <form action="cart.php" method="POST">
@@ -69,5 +81,4 @@ $categoryData = mysqli_fetch_assoc($resultCategory);
         <button type="submit">Add</button>
     </form>
 </body>
-
 </html>
